@@ -18,7 +18,7 @@ export const ActionCreators = {
 // NOTE only one state could be called at the time (as an enum can)
 export default function NotesReducer(state = initialState, action) {
     switch (action.type) {
-        // If SET_NOTES action will be called in ActionCreators, this action create array of notes and fill it with the payload(notes)
+        // If SET_NOTES action will be called in ActionCreators, this action fill array of notes with the payload(notes)
         case ActionTypes.SET_NOTES:
             return { ...state, notes: [...action.payload] }
         default:
