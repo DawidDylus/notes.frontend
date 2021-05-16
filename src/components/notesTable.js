@@ -6,6 +6,7 @@ export function NotesTable() {
     const notes = useSelector(state => state.notesReducer.notes)
     const dispatch = useDispatch();
 
+    // useEffect is a way to call functions without a class (hooks) for the time being just remember that and i am sure it will get more clear later.
     useEffect(() => {
         GetNotes(dispatch);
     },
@@ -15,6 +16,15 @@ export function NotesTable() {
     return <table className="table table-dark">
         <tbody>
             {
+
+                /* what .map does
+                                 React.Children.map(children, function[(thisArg)])
+                 Invokes a function on every immediate child contained within children with this set to thisArg.
+                 If children is an array it will be traversed and the function will be called for each child in the array.
+                 If children is null or undefined, this method will return null or undefined rather than an array.
+
+                 In the code below .map for every n (where n is a object in an array of notes) it's value is displayed on the site (array of notes).
+                */
                 notes.map(n =>
                     <tr>
                         <td style={{ textAlign: 'left' }}>{n.value}</td>
