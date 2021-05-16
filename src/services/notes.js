@@ -1,4 +1,4 @@
-import { ActionCreators } from "../redux/notesReducer";
+import { ActionCreators } from '../redux/notesReducer';
 
 export const GetNotes = async (dispatch) => {
     try {
@@ -6,12 +6,13 @@ export const GetNotes = async (dispatch) => {
 
         // TODO api call
         const response = [
-            { value: 'Study for exam in 3 weeks', id: 1},
-            { value: 'second note', id: 2},
-            { value: 'Third note', id: 3},
-            { value: 'fourth note', id: 4},
+            { value: 'Study for exam in 3 weeks', id: 1 },
+            { value: 'second note', id: 2 },
+            { value: 'Third note', id: 3 },
+            { value: 'fourth note', id: 4 },
         ];
 
+        // call setNotes function that fill table of notes on the site. (frontend)
         dispatch(ActionCreators.setNotes(response));
     }
     catch {
@@ -24,7 +25,38 @@ export const DeleteNote = async (dispatch, note) => {
         // Delete note
 
         // TODO api call
+
+        // Call deleteNote action that deletes the note from view. (frontend)
         dispatch(ActionCreators.deleteNote(note));
+    }
+    catch {
+        console.log("Error!");
+    }
+}
+
+export const NewNote = async (dispatch, note) => {
+    try {
+        // Create New note
+        const response = { value: note, id: 1 };
+
+        // TODO api call
+
+        // Call newNote action that deletes the note from view. (frontend)
+        dispatch(ActionCreators.newNote(response));
+    }
+    catch {
+        console.log("Error!");
+    }
+}
+
+export const EditNote = async (dispatch, note) => {
+    try {
+        // Edit note
+        const response = { value: note, id: 1 };
+        // TODO api call
+
+        // Call editNote action that deletes the note from view. (frontend)
+        dispatch(ActionCreators.editNote(response));
     }
     catch {
         console.log("Error!");
