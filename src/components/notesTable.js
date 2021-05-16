@@ -1,6 +1,7 @@
+import { Button } from 'react-bootstrap';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { GetNotes } from '../services/notes';
+import { DeleteNote, GetNotes } from '../services/notes';
 
 export function NotesTable() {
     const notes = useSelector(state => state.notesReducer.notes)
@@ -8,7 +9,7 @@ export function NotesTable() {
 
     // useEffect is a way to call functions without a class (hooks) for the time being just remember that and i am sure it will get more clear later.
     useEffect(() => {
-        GetNotes(dispatch);
+        GetNotes(dispatch);  // GetNotes is a function(service) that is used to get informations from the database and then use reducer and it's action to set the array of notes.
     },
         []
     );
@@ -27,6 +28,9 @@ export function NotesTable() {
                 */
                 notes.map(n =>
                     <tr>
+                        <td style={{ width: '3rem' }}>
+                            <Button className='btn btn-danger' onClick={() => DeleteNote(dispatch, n)}>Delete</Button>
+                        </td>
                         <td style={{ textAlign: 'left' }}>{n.value}</td>
                     </tr>)
             }

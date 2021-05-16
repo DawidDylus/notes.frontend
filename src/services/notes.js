@@ -18,3 +18,15 @@ export const GetNotes = async (dispatch) => {
         console.log("Error!");
     }
 }
+
+export const DeleteNote = async (dispatch, note) => {
+    try {
+        // Delete note
+
+        // TODO api call
+        dispatch(ActionCreators.deleteNote(note));
+    }
+    catch {
+        console.log("Error!");
+    }
+}
