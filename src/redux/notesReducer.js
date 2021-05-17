@@ -27,23 +27,23 @@ export default function NotesReducer(state = initialState, action) {
         case ActionTypes.SET_NOTES:
             return { ...state, notes: [...action.payload] }
         case ActionTypes.DELETE_NOTE:
-            for (let i = 0; i < state.notes.length; i++) {
-                if (state.notes[i].id === action.payload.id) {
-                    state.notes.splice(i, 1);
-                    break;
-                }
-            }
-            return { ...state, notes: [...state.notes] }
+            return { ...state, notes: [...state.notes.filter(note => note.id !== action.payload.id)] }
         case ActionTypes.NEW_NOTE:
             return { ...state, notes: [...state.notes, action.payload] } // append new note
         case ActionTypes.EDIT_NOTE:
-            for (let i = 0; i < state.notes.length; i++) {
-                if (state.notes[i].id === action.payload.id) {
-                    state.notes[i].value = action.payload.value;
-                    break;
+            /* for (let i = 0; i < state.notes.length; i++) {
+                 if (state.notes[i].id === action.payload.id) {
+                     state.notes[i].value = action.payload.value;
+                     break;
+                 }
+             }*/
+            let notes = state.notes.map(note => {
+                if (note.id === action.payload.id) {
+                    note = action.payload
                 }
-            }
-            return { ...state, notes: [...state.notes] }
+                return note;
+            })
+            return { ...state, notes: [...notes] }
         default:
             return state;
     }
