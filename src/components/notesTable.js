@@ -28,9 +28,9 @@ export function NotesTable() {
                  In the code below .map for every n (where n is a object in an array of notes) it's value is displayed on the site (array of notes).
                 */
                 notes.map(n =>
-                    <tr>
+                    <tr key={n.id}>
                         <td style={{ width: '3rem' }}>
-                            <EditNoteModal note={n.value}/>
+                            <EditNoteModal note={n}/>
                         </td>
                         <td style={{ width: '3rem' }}>
                             <Button className='btn btn-danger' onClick={() => DeleteNote(dispatch, n)}>Delete</Button>

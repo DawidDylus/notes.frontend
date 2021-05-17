@@ -1,64 +1,58 @@
 import { ActionCreators } from '../redux/notesReducer';
+import * as axios from 'axios';
+
+const axiosInstance = axios.create({
+    baseURL: 'https://localhost:5001/api/Notes',
+})
 
 export const GetNotes = async (dispatch) => {
     try {
         // Retrive all the notes
-
-        // TODO api call
-        const response = [
-            { value: 'Study for exam in 3 weeks', id: 1 },
-            { value: 'second note', id: 2 },
-            { value: 'Third note', id: 3 },
-            { value: 'fourth note', id: 4 },
-        ];
+        const { data } = await axiosInstance.get();
 
         // call setNotes function that fill table of notes on the site. (frontend)
-        dispatch(ActionCreators.setNotes(response));
+        dispatch(ActionCreators.setNotes(data));
     }
     catch {
-        console.log("Error!");
+        console.log("Error! Could not load the notes.");
     }
 }
 
 export const DeleteNote = async (dispatch, note) => {
     try {
         // Delete note
-
-        // TODO api call
+        await axiosInstance.delete(`/${note.id}`);
 
         // Call deleteNote action that deletes the note from view. (frontend)
         dispatch(ActionCreators.deleteNote(note));
     }
     catch {
-        console.log("Error!");
+        console.log("Error! Could not delete the notes.");
     }
 }
 
 export const NewNote = async (dispatch, note) => {
     try {
         // Create New note
-        const response = { value: note, id: 1 };
-
-        // TODO api call
+        const { data } = await axiosInstance.post('', note);
 
         // Call newNote action that deletes the note from view. (frontend)
-        dispatch(ActionCreators.newNote(response));
+        dispatch(ActionCreators.newNote(data));
     }
     catch {
-        console.log("Error!");
+        console.log("Error! Could not add new note.");
     }
 }
 
 export const EditNote = async (dispatch, note) => {
     try {
         // Edit note
-        const response = { value: note, id: 1 };
-        // TODO api call
+        await axiosInstance.put(`/${note.id}`, note);
 
         // Call editNote action that deletes the note from view. (frontend)
-        dispatch(ActionCreators.editNote(response));
+        dispatch(ActionCreators.editNote(note));
     }
     catch {
-        console.log("Error!");
+        console.log("Error! Could not edit the note.");
     }
 }

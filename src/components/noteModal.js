@@ -20,14 +20,14 @@ export const EditNoteModal = ({ note }) => {
     const handleShow = () => setShow(true);
 
     return <div>
-        <Button onClick={handleShow} className='btn btn-warning'>Edit Note</Button>
+        <Button onClick={handleShow} className='btn btn-warning'>Edit</Button>
         <NoteModal show={show} handleClose={handleClose} handleFormSubmit={EditNote} note={note} />
     </div>
 }
 
 const NoteModal = ({ show, handleClose, handleFormSubmit, note }) => {
 
-    const [modalNote, setModalNote] = useState('');
+    const [modalNote, setModalNote] = useState({}); // modalNote is an Object
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -48,7 +48,8 @@ const NoteModal = ({ show, handleClose, handleFormSubmit, note }) => {
 
                 <Modal.Body>
                     <InputGroup>
-                        <FormControl value={modalNote === null ? '' : modalNote} onChange={event => setModalNote(event.target.value)} />
+                        <FormControl value={modalNote === null ? '' : modalNote.value}
+                            onChange={event => setModalNote({ ...modalNote, value: event.target.value })} />
                     </InputGroup>
                 </Modal.Body>
                 <Modal.Footer>
@@ -59,5 +60,3 @@ const NoteModal = ({ show, handleClose, handleFormSubmit, note }) => {
         </Modal>
     );
 }
-
-//render(<NoteModal />);
