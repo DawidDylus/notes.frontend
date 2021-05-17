@@ -31,12 +31,6 @@ export default function NotesReducer(state = initialState, action) {
         case ActionTypes.NEW_NOTE:
             return { ...state, notes: [...state.notes, action.payload] } // append new note
         case ActionTypes.EDIT_NOTE:
-            /* for (let i = 0; i < state.notes.length; i++) {
-                 if (state.notes[i].id === action.payload.id) {
-                     state.notes[i].value = action.payload.value;
-                     break;
-                 }
-             }*/
             let notes = state.notes.map(note => {
                 if (note.id === action.payload.id) {
                     note = action.payload
